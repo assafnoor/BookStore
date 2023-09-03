@@ -6,6 +6,7 @@
         T GetById(int id);
         T Add(T entity);
         T Update(T entity);
-        T Delete(T entity);   
+        T Delete(T entity);
+        List<T> Search(string term);
     }
 }

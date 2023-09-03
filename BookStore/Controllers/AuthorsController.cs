@@ -3,6 +3,7 @@ using BookStore.Dto;
 using BookStore.Models;
 using BookStore.Models.Repositories;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -62,6 +63,13 @@ namespace BookStore.Controllers
             var result = _repo.GetById(id);
             if (result is null) return NotFound();
            return Ok( _repo.Delete(result));
+        }
+        [HttpGet("Search")]
+        public async Task<IActionResult> Search(string term)
+        {
+           var result = _repo.Search(term);
+            var data = _mapper.Map<IEnumerable<AuthorDetailsDto>>(result);
+            return Ok(data);
         }
     }
 }

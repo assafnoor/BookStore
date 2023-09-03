@@ -70,5 +70,12 @@ namespace BookStore.Controllers
             _repo.Delete(result);
             return Ok(result);
         }
+        [HttpGet("Search")]
+        public async Task<IActionResult> Search(string term)
+        {
+            var result = _repo.Search(term);
+            var data = _mapper.Map<IEnumerable<BookDetailsDto>>(result);
+            return Ok(data);
+        }
     }
 }

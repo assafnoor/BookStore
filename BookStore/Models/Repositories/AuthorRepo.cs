@@ -37,6 +37,12 @@ namespace BookStore.Models.Repositories
              return result;
         }
 
+        public List<Author> Search(string term)
+        {
+           var result =_context.Authors.Include(b => b.books).Where(a=>a.Name.Contains(term)).ToList();
+            return result;
+        }
+
         public Author Update(Author entity)
         {
            _context.Authors.Update(entity);
